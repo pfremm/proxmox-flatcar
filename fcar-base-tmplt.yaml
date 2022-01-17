@@ -1,12 +1,8 @@
-# kernel config
-    - path: /etc/sysctl.d/20-silence-audit.conf
-      mode: 0644      
-      contents:
-        inline: |
-          # Raise console message logging level from DEBUG (7) to WARNING (4)
-          # to hide audit messages from the interactive console
-          kernel.printk=4
-
+passwd:
+  users:
+    - name: core
+      ssh_authorized_keys:
+        - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCkVhUeG7LlW8pCQqW0VncUbtEHpjF/0VXjje79HgRvfazTBop/M4RzY30K8I0GzrJT3pi7Butj49844uezCLFLwFg8g/xFq+bnebkYgGvGUJ9yWtjNAtTuFZcJVgow3kxTJR7JgGlTotk2gXPgvcNspsKLzJ8pIkrb8KVrbeIGN6PRbeAgkd3gJTfH8CshzwB1B8brYncsFygcaUwauJc+EhEFCgh9EROVWgC+vu66PSRkCngZwry66Oc9FbavG36Y6KnFGkVjv2dE9DWO2Yj5oVTiKOnOF6IeyYen17dnMwKHYTk68zN6js+4nxISkeymWzbmUIfcREYdZQMyWq0EKydm0XcOfYOurEiMrUJN11ldG8J7LU3AlxXJlBlu3RmltmwvBqsDvpCdrEBYpu9vYKS77bzgpMCMnLd2J6MkBkvQNMXPl/IBvCPZxEoLS7VOPLUQ8/sfdwnepw7tQMiE/TmuEsM/MYACPOeZ4FXNVd+Hs1UwWq43xAcyaZXxWAc= bryan@Bryans-MacBook-Pro.local
 # Systemd services
 systemd:
   units:
