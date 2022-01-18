@@ -1,8 +1,3 @@
-passwd:
-  users:
-    - name: core
-      ssh_authorized_keys:
-        - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCkVhUeG7LlW8pCQqW0VncUbtEHpjF/0VXjje79HgRvfazTBop/M4RzY30K8I0GzrJT3pi7Butj49844uezCLFLwFg8g/xFq+bnebkYgGvGUJ9yWtjNAtTuFZcJVgow3kxTJR7JgGlTotk2gXPgvcNspsKLzJ8pIkrb8KVrbeIGN6PRbeAgkd3gJTfH8CshzwB1B8brYncsFygcaUwauJc+EhEFCgh9EROVWgC+vu66PSRkCngZwry66Oc9FbavG36Y6KnFGkVjv2dE9DWO2Yj5oVTiKOnOF6IeyYen17dnMwKHYTk68zN6js+4nxISkeymWzbmUIfcREYdZQMyWq0EKydm0XcOfYOurEiMrUJN11ldG8J7LU3AlxXJlBlu3RmltmwvBqsDvpCdrEBYpu9vYKS77bzgpMCMnLd2J6MkBkvQNMXPl/IBvCPZxEoLS7VOPLUQ8/sfdwnepw7tQMiE/TmuEsM/MYACPOeZ4FXNVd+Hs1UwWq43xAcyaZXxWAc= bryan@Bryans-MacBook-Pro.local
 # Systemd services
 systemd:
   units:
@@ -69,3 +64,45 @@ systemd:
 
         [Install]
         WantedBy=sockets.target
+
+storage:
+  files:
+    - path: /etc/nsswitch.conf
+      filesystem: root
+      mode: 0644
+      contents:
+        inline: |
+          # /etc/nsswitch.conf:
+
+          passwd:      files usrfiles
+          shadow:      files usrfiles
+          group:       files usrfiles
+
+          hosts:       files usrfiles dns
+          networks:    files usrfiles dns
+
+          services:    files usrfiles
+          protocols:   files usrfiles
+          rpc:         files usrfiles
+
+          ethers:      files
+          netmasks:    files
+          netgroup:    files
+          bootparams:  files
+          automount:   files
+          aliases:     files
+    - path: /etc/systemd/resolved.conf
+      filesystem: root
+      mode: 0644
+      contents:
+        inline: |
+          # /etc/systemd/resolved.conf
+          [Resolve]
+          DNSStubListener=no
+    - path: /grub.cfg
+      filesystem: oem
+      mode: 0644
+      contents:
+        inline: |
+          set oem_id=\"qemu\"
+          set linux_append=\"\"          
