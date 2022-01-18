@@ -164,9 +164,7 @@ networkd:
       Name=${netcard_name}
 
       [Network]
-      DNS=${nameservers}
-      Address=${ipv4}/${cidr}
-      Gateway=${gw}
+      DHCP=yes
       Domains=${searchdomain}
 " >> ${FCAR_FILES_PATH}/${vmid}.yaml
 		fi
