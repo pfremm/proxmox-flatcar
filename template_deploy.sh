@@ -50,7 +50,7 @@ else
 #write Template VM_ID in a file.
         TEMPLATE_CREATE="false"
 fi
-
+TEMPLATE_CREATE="true"
 FCAR_IMAGE=flatcar_production_${PLATFORM}_image.img
 FCAR_ARCHIVE=${FCAR_IMAGE}.bz2
 FCAR_IMAGE_URL=${BASEURL}/amd64-usr/${VERSION}/${FCAR_ARCHIVE}
